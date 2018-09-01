@@ -147,4 +147,92 @@ public class ImageUtils {
 		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2d.drawImage(add, 0, 0, null);
 	}
+
+	/**
+	 * 射影変換して変換先の画像に乗せる
+	 *
+	 * @param source
+	 *            変換元の画像
+	 * @param fromX1
+	 *            変換元 左上のX座標
+	 * @param fromY1
+	 *            変換元 左上のy座標
+	 * @param fromX2
+	 *            変換元 左下のX座標
+	 * @param fromY2
+	 *            変換元 左下のy座標
+	 * @param fromX3
+	 *            変換元 右下のX座標
+	 * @param fromY3
+	 *            変換元 右下のy座標
+	 * @param fromX4
+	 *            変換元 右上のX座標
+	 * @param fromY4
+	 *            変換元 右上のy座標
+	 * @param target
+	 *            変換先を描画する画像
+	 * @param toX1
+	 *            変換先 左上のX座標
+	 * @param toY1
+	 *            変換先 左上のy座標
+	 * @param toX2
+	 *            変換先 左下のX座標
+	 * @param toY2
+	 *            変換先 左下のy座標
+	 * @param toX3
+	 *            変換先 右下のX座標
+	 * @param toY3
+	 *            変換先 右下のy座標
+	 * @param toX4
+	 *            変換先 右上のX座標
+	 * @param toY4
+	 *            変換先 右上のy座標
+	 */
+	public static void transform(
+			final BufferedImage source,
+			final int fromX1, final int fromY1,
+			final int fromX2, final int fromY2,
+			final int fromX3, final int fromY3,
+			final int fromX4, final int fromY4,
+			final BufferedImage target,
+			final int toX1, final int toY1,
+			final int toX2, final int toY2,
+			final int toX3, final int toY3,
+			final int toX4, final int toY4) {
+
+		final double[][] matrixA = {
+				{ fromX1, fromY1, 1, 0, 0, 0, -toX1 * fromX1, -toX1 * fromY1 },
+				{ fromX2, fromY2, 1, 0, 0, 0, -toX2 * fromX2, -toX2 * fromY2 },
+				{ fromX3, fromY3, 1, 0, 0, 0, -toX3 * fromX3, -toX3 * fromY3 },
+				{ fromX4, fromY4, 1, 0, 0, 0, -toX4 * fromX4, -toX4 * fromY4 },
+				{ 0, 0, 0, fromX1, fromY1, 1, -toY1 * fromX1, -toY1 * fromY1 },
+				{ 0, 0, 0, fromX2, fromY2, 1, -toY2 * fromX2, -toY2 * fromY2 },
+				{ 0, 0, 0, fromX3, fromY3, 1, -toY3 * fromX3, -toY3 * fromY3 },
+				{ 0, 0, 0, fromX4, fromY4, 1, -toY4 * fromX4, -toY4 * fromY4 },
+		};
+		final double[][] matrixR = GyakuGyouretu.gyaku(matrixA);
+
+		final double a1 = matrixR[0][0] * toX1 + matrixR[0][1] * toX2 + matrixR[0][2] * toX3 + matrixR[0][3] * toX4 + matrixR[0][4] * toY1 + matrixR[0][5] * toY2 + matrixR[0][6] * toY3 + matrixR[0][7] * toY4;
+		final double a2 = matrixR[1][0] * toX1 + matrixR[1][1] * toX2 + matrixR[1][2] * toX3 + matrixR[1][3] * toX4 + matrixR[1][4] * toY1 + matrixR[1][5] * toY2 + matrixR[1][6] * toY3 + matrixR[1][7] * toY4;
+		final double a3 = matrixR[2][0] * toX1 + matrixR[2][1] * toX2 + matrixR[2][2] * toX3 + matrixR[2][3] * toX4 + matrixR[2][4] * toY1 + matrixR[2][5] * toY2 + matrixR[2][6] * toY3 + matrixR[2][7] * toY4;
+		final double a4 = matrixR[3][0] * toX1 + matrixR[3][1] * toX2 + matrixR[3][2] * toX3 + matrixR[3][3] * toX4 + matrixR[3][4] * toY1 + matrixR[3][5] * toY2 + matrixR[3][6] * toY3 + matrixR[3][7] * toY4;
+		final double a5 = matrixR[4][0] * toX1 + matrixR[4][1] * toX2 + matrixR[4][2] * toX3 + matrixR[4][3] * toX4 + matrixR[4][4] * toY1 + matrixR[4][5] * toY2 + matrixR[4][6] * toY3 + matrixR[4][7] * toY4;
+		final double a6 = matrixR[5][0] * toX1 + matrixR[5][1] * toX2 + matrixR[5][2] * toX3 + matrixR[5][3] * toX4 + matrixR[5][4] * toY1 + matrixR[5][5] * toY2 + matrixR[5][6] * toY3 + matrixR[5][7] * toY4;
+		final double a7 = matrixR[6][0] * toX1 + matrixR[6][1] * toX2 + matrixR[6][2] * toX3 + matrixR[6][3] * toX4 + matrixR[6][4] * toY1 + matrixR[6][5] * toY2 + matrixR[6][6] * toY3 + matrixR[6][7] * toY4;
+		final double a8 = matrixR[7][0] * toX1 + matrixR[7][1] * toX2 + matrixR[7][2] * toX3 + matrixR[7][3] * toX4 + matrixR[7][4] * toY1 + matrixR[7][5] * toY2 + matrixR[7][6] * toY3 + matrixR[7][7] * toY4;
+
+		final int width = source.getWidth();
+		final int height = source.getHeight();
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				final double newX = (a1 * x + a2 * y + a3) / (a7 * x + a8 * y + 1);
+				final double newY = (a4 * x + a5 * y + a6) / (a7 * x + a8 * y + 1);
+				if (newX < 0 || newX >= target.getWidth() || newY < 0 || newY >= target.getHeight()) {
+					// System.out.printf("(%d,%d,) -> (%f,%f)%n", x, y, newX, newY);
+				} else {
+					target.setRGB((int) newX, (int) newY, source.getRGB(x, y)); // 補正なし、近い位置から取得してるだけ
+				}
+			}
+		}
+	}
 }
