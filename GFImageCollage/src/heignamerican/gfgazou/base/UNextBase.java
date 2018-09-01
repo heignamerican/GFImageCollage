@@ -64,34 +64,6 @@ public class UNextBase {
 		}
 	}
 
-	public enum Orientation {
-		/**
-		 * 縦長
-		 */
-		Portrait,
-		/**
-		 * 横長
-		 */
-		Landscape,
-	}
-
-	public enum RotateDirection {
-		/**
-		 * 時計回り＝右回り
-		 */
-		Clockwise,
-
-		/**
-		 * 反時計回り＝左回り
-		 */
-		CounterClockwise,
-
-		/**
-		 * 回転不要
-		 */
-		None,
-	}
-
 	private static BufferedImage rotateImage(final BufferedImage source, final RotateDirection rotateDirection) {
 		if (rotateDirection == RotateDirection.Clockwise) {
 			return ImageUtils.rotateClockwise90Degree(source);

@@ -5,10 +5,10 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import heignamerican.gfgazou.base.Files;
+import heignamerican.gfgazou.base.Orientation;
+import heignamerican.gfgazou.base.RotateDirection;
 import heignamerican.gfgazou.base.UNext;
 import heignamerican.gfgazou.base.UNextBase;
-import heignamerican.gfgazou.base.UNextBase.Orientation;
-import heignamerican.gfgazou.base.UNextBase.RotateDirection;
 
 public class MashiroNurse implements UNext {
 	@Override
