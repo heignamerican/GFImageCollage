@@ -34,7 +34,7 @@ public class UNextBase {
 		return newImage;
 	}
 
-	private static void kasaneru(final BufferedImage target, final BufferedImage add) {
+	public static void kasaneru(final BufferedImage target, final BufferedImage add) {
 		final Graphics2D graphics2d = target.createGraphics();
 		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2d.drawImage(add, 0, 0, null);
