@@ -67,8 +67,16 @@ public class ImageUtils {
 		return after;
 	}
 
-	public static void kasaneru(final BufferedImage target, final BufferedImage add) {
-		final Graphics2D graphics2d = target.createGraphics();
+	/**
+	 * 画像を重ねる。
+	 *
+	 * @param base
+	 *            重ねられる方。 破壊的変更
+	 * @param add
+	 *            重ねる方。
+	 */
+	public static void overlay(final BufferedImage base, final BufferedImage add) {
+		final Graphics2D graphics2d = base.createGraphics();
 		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2d.drawImage(add, 0, 0, null);
 	}

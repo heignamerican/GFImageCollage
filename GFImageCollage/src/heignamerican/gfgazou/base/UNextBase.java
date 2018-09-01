@@ -23,7 +23,7 @@ public class UNextBase {
 
 	public BufferedImage createUNext(final BufferedImage add) throws IOException, URISyntaxException {
 		final BufferedImage newImage = ImageIO.read(this.clazz.getResource(this.baseFileName));
-		ImageUtils.kasaneru(newImage, add);
+		ImageUtils.overlay(newImage, add);
 
 		final BufferedImage base = ImageIO.read(this.clazz.getResource(this.baseFileName));
 		for (final String modosuyatu : this.modosuyatura) {

@@ -39,8 +39,8 @@ public class Yae学園交流 implements UNext {
 				RotateDirection.CounterClockwise);
 
 		final BufferedImage add = new BufferedImage(800, 640, BufferedImage.TYPE_INT_ARGB); // FIXME
-		ImageUtils.kasaneru(add, add1);
-		ImageUtils.kasaneru(add, add2);
+		ImageUtils.overlay(add, add1);
+		ImageUtils.overlay(add, add2);
 
 		ImageIO.write(unextbase.createUNext(add), files.getExtension(), files.getDestFile());
 	}
