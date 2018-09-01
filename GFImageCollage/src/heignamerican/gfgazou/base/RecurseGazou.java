@@ -5,20 +5,20 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class RecurseGazou {
-	public static void henkan(final UNext unext, final String fileName) throws Exception {
-		unext.gazou(fileName);
+	public static void henkan(final UNext unext, final String... fileNames) throws Exception {
+		unext.gazou(fileNames);
 	}
 
-	public static void henkan(final UNext unext, final String fileName, final int count) throws Exception {
+	public static void henkan(final UNext unext, final int count, final String... fileNames) throws Exception {
 		if (count == 0) {
-			henkan(unext, fileName);
+			henkan(unext, fileNames);
 			return;
 		}
 
 		final Path dir = Paths.get(unext.getWorkFolder());
-		final String nameTemplate = fileName + "--henkan-r%d." + Files.EXTENSION_JPG;
+		final String nameTemplate = fileNames[0] + "--henkan-r%d." + Files.EXTENSION_JPG;
 
-		String currentName = fileName;
+		String currentName = fileNames[0];
 
 		for (int i = 0; i <= count; i++) {
 			Files files = new Files(unext, currentName, Files.EXTENSION_JPG);

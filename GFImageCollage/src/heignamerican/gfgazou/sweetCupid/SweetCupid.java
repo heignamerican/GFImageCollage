@@ -13,7 +13,9 @@ import heignamerican.gfgazou.base.UNextBase.RotateDirection;
 
 public class SweetCupid implements UNext {
 	@Override
-	public void gazou(final Files files) throws Exception {
+	public void gazou(Files... filesList) throws Exception {
+		final Files files = filesList[0];
+
 		// キュピ背景に重ねたキュピ結果イメージを生成
 		final BufferedImage cupidImage;
 		{

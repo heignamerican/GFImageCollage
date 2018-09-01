@@ -12,7 +12,9 @@ import heignamerican.gfgazou.base.UNextBase.RotateDirection;
 
 public class Tooyamaハンカチ implements UNext {
 	@Override
-	public void gazou(Files files) throws Exception {
+	public void gazou(Files... filesList) throws Exception {
+		final Files files = filesList[0];
+
 		final UNextBase unextbase = new UNextBase(this.getClass(), "base.jpg", new String[] {
 				"yubi1.txt",
 				"yubi2.txt",

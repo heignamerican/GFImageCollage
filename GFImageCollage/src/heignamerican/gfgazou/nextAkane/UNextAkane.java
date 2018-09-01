@@ -12,7 +12,9 @@ import heignamerican.gfgazou.base.UNextBase.RotateDirection;
 
 public class UNextAkane implements UNext {
 	@Override
-	public void gazou(final Files files) throws Exception {
+	public void gazou(Files... filesList) throws Exception {
+		final Files files = filesList[0];
+
 		// No.3918 [お手軽映画]櫻井明音 ... U-NEXT明音 全ての始まり
 		final UNextBase unextbase = new UNextBase(this.getClass(), "base.jpg", new String[] {
 				"kami.txt",

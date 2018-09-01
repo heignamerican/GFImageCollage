@@ -11,7 +11,10 @@ import heignamerican.gfgazou.base.UNextBase.Orientation;
 import heignamerican.gfgazou.base.UNextBase.RotateDirection;
 
 public class MashiroNurse implements UNext {
-	public void gazou(final Files files) throws Exception {
+	@Override
+	public void gazou(Files... filesList) throws Exception {
+		final Files files = filesList[0];
+
 		// No.11259 [白衣の天使]真白透子 ... 第1進展
 		final UNextBase unextbase = new UNextBase(this.getClass(), "base.jpg", new String[] {
 				"yubi.txt",

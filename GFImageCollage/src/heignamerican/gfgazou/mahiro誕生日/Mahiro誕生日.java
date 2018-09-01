@@ -12,7 +12,9 @@ import heignamerican.gfgazou.base.UNextBase.RotateDirection;
 
 public class Mahiro誕生日 implements UNext {
 	@Override
-	public void gazou(final Files files) throws Exception {
+	public void gazou(Files... filesList) throws Exception {
+		final Files files = filesList[0];
+
 		// No.7070 [誕生日16]夏目真尋 ... 第1進展
 		final UNextBase unextbase = new UNextBase(this.getClass(), "base.jpg", new String[] {
 				"sode.txt",
