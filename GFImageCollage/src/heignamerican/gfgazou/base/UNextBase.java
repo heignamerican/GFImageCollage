@@ -155,7 +155,8 @@ public class UNextBase {
 	 * <p>
 	 * x1～y4 は、左上・左下・右下・右上の各座標の変換先座標。
 	 *
-	 * @param add
+	 * @param image
+	 *            変換する元画像
 	 * @param expectedRateForCutoff
 	 *            期待する元画像の縦横レート。レートが合わない場合は超過した方を切り落とす。 <br>
 	 *            値は rotateDirection した後の width/height で表現する。<br>
@@ -182,7 +183,7 @@ public class UNextBase {
 	 *            {@link RotateDirection} ではなかった場合の回転方向
 	 * @return
 	 */
-	public BufferedImage transform(final BufferedImage add,
+	public BufferedImage transform(final BufferedImage image,
 			final double expectedRateForCutoff,
 			final int toX1,
 			final int toY1,
@@ -203,7 +204,7 @@ public class UNextBase {
 		// from: source (<- addFile)
 		// to: result (<- baseFile)
 
-		final BufferedImage sourceBeforeCut = rotateImage(add, choiseDirection(add, expectedOrientation, rotateDirection));
+		final BufferedImage sourceBeforeCut = rotateImage(image, choiseDirection(image, expectedOrientation, rotateDirection));
 		final BufferedImage source = cutoffIfOver(expectedRateForCutoff, sourceBeforeCut);
 
 		final int width = source.getWidth();
