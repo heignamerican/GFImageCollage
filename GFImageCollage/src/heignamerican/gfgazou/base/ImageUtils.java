@@ -6,7 +6,17 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+/**
+ * 画像変換系の共通処理
+ */
 public class ImageUtils {
+	/**
+	 * 時計回りに直角だけ回転させた新しい画像を生成して返す。
+	 *
+	 * @param img
+	 *            元の画像
+	 * @return
+	 */
 	public static BufferedImage rotateClockwise90Degree(final BufferedImage img) {
 		final BufferedImage result = new BufferedImage(img.getHeight(), img.getWidth(), img.getType());
 
@@ -18,6 +28,13 @@ public class ImageUtils {
 		return result;
 	}
 
+	/**
+	 * 反時計回りに直角だけ回転させた新しい画像を生成して返す。
+	 *
+	 * @param img
+	 *            元の画像
+	 * @return
+	 */
 	public static BufferedImage rotateCounterClockwise90Degree(final BufferedImage img) {
 		final BufferedImage result = new BufferedImage(img.getHeight(), img.getWidth(), img.getType());
 
@@ -29,41 +46,91 @@ public class ImageUtils {
 		return result;
 	}
 
-	public static BufferedImage cutOffHeightLeavingCenter(final BufferedImage source, final int newHeight) {
-		final BufferedImage result = new BufferedImage(source.getWidth(), newHeight, source.getType());
+	/**
+	 * 縦方向に切り取った新しい画像を生成する。
+	 *
+	 * <p>
+	 * 元画像の中央部分が切り取られるような位置が選択される。
+	 *
+	 * @param img
+	 *            元の画像
+	 * @param newHeight
+	 *            新しい画像の高さ。もとの高さより小さいこと
+	 * @return
+	 */
+	public static BufferedImage cutOffHeightLeavingCenter(final BufferedImage img, final int newHeight) {
+		final BufferedImage result = new BufferedImage(img.getWidth(), newHeight, img.getType());
 
 		for (int y = 0; y < result.getHeight(); y++) {
 			for (int x = 0; x < result.getWidth(); x++) {
-				final int offsetY = (source.getHeight() - result.getHeight()) / 2;
-				result.setRGB(x, y, source.getRGB(x, y + offsetY));
+				final int offsetY = (img.getHeight() - result.getHeight()) / 2;
+				result.setRGB(x, y, img.getRGB(x, y + offsetY));
 			}
 		}
 		return result;
 	}
 
-	public static BufferedImage cutOffWidthLeavingCenter(final BufferedImage source, final int newWidth) {
-		final BufferedImage result = new BufferedImage(newWidth, source.getHeight(), source.getType());
+	/**
+	 * 横方向に切り取った新しい画像を生成する。
+	 *
+	 * <p>
+	 * 元画像の中央部分が切り取られるような位置が選択される。
+	 *
+	 * @param img
+	 *            元の画像
+	 * @param newWidth
+	 *            新しい画像の幅。もとの幅より小さいこと
+	 * @return
+	 */
+	public static BufferedImage cutOffWidthLeavingCenter(final BufferedImage img, final int newWidth) {
+		final BufferedImage result = new BufferedImage(newWidth, img.getHeight(), img.getType());
 
 		for (int y = 0; y < result.getHeight(); y++) {
 			for (int x = 0; x < result.getWidth(); x++) {
-				final int offsetX = (source.getWidth() - result.getWidth()) / 2;
-				result.setRGB(x, y, source.getRGB(x + offsetX, y));
+				final int offsetX = (img.getWidth() - result.getWidth()) / 2;
+				result.setRGB(x, y, img.getRGB(x + offsetX, y));
 			}
 		}
 		return result;
 	}
 
-	public static BufferedImage scale(final BufferedImage source, final int scale) {
-		return scale(source, scale, scale);
+	/**
+	 * 指定した割合で画像を拡大率変換する。
+	 *
+	 * <p>
+	 * アフィン変換するよ
+	 *
+	 * @param img
+	 *            元の画像
+	 * @param scale
+	 *            幅・高さ方向両方で同一の拡大率
+	 * @return
+	 */
+	public static BufferedImage scale(final BufferedImage img, final int scale) {
+		return scale(img, scale, scale);
 	}
 
-	public static BufferedImage scale(final BufferedImage source, final int scaleX, final int scaleY) {
+	/**
+	 * 指定した割合で画像を拡大率変換する。
+	 *
+	 * <p>
+	 * アフィン変換するよ
+	 *
+	 * @param img
+	 *            元の画像
+	 * @param scaleX
+	 *            幅方向の拡大率
+	 * @param scaleY
+	 *            高さ方向の拡大率
+	 * @return
+	 */
+	public static BufferedImage scale(final BufferedImage img, final int scaleX, final int scaleY) {
 		final AffineTransform affine = new AffineTransform();
 		affine.scale(scaleX, scaleY);
 		final AffineTransformOp affineTransformOp = new AffineTransformOp(affine, AffineTransformOp.TYPE_BILINEAR);
 
-		final BufferedImage after = new BufferedImage(source.getWidth() * scaleX, source.getHeight() * scaleY, BufferedImage.TYPE_INT_ARGB);
-		affineTransformOp.filter(source, after);
+		final BufferedImage after = new BufferedImage(img.getWidth() * scaleX, img.getHeight() * scaleY, BufferedImage.TYPE_INT_ARGB);
+		affineTransformOp.filter(img, after);
 		return after;
 	}
 
