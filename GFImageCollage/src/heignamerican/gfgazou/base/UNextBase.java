@@ -1,7 +1,5 @@
 package heignamerican.gfgazou.base;
 
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -25,19 +23,13 @@ public class UNextBase {
 
 	public BufferedImage createUNext(final BufferedImage add) throws IOException, URISyntaxException {
 		final BufferedImage newImage = ImageIO.read(this.clazz.getResource(this.baseFileName));
-		kasaneru(newImage, add);
+		ImageUtils.kasaneru(newImage, add);
 
 		final BufferedImage base = ImageIO.read(this.clazz.getResource(this.baseFileName));
 		for (final String modosuyatu : this.modosuyatura) {
 			modosu(base, newImage, this.clazz.getResourceAsStream(modosuyatu));
 		}
 		return newImage;
-	}
-
-	public static void kasaneru(final BufferedImage target, final BufferedImage add) {
-		final Graphics2D graphics2d = target.createGraphics();
-		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics2d.drawImage(add, 0, 0, null);
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package heignamerican.gfgazou.base;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -63,5 +65,11 @@ public class ImageUtils {
 		final BufferedImage after = new BufferedImage(source.getWidth() * scaleX, source.getHeight() * scaleY, BufferedImage.TYPE_INT_ARGB);
 		affineTransformOp.filter(source, after);
 		return after;
+	}
+
+	public static void kasaneru(final BufferedImage target, final BufferedImage add) {
+		final Graphics2D graphics2d = target.createGraphics();
+		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics2d.drawImage(add, 0, 0, null);
 	}
 }

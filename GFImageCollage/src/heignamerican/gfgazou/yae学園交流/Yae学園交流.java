@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import heignamerican.gfgazou.base.Files;
+import heignamerican.gfgazou.base.ImageUtils;
 import heignamerican.gfgazou.base.Orientation;
 import heignamerican.gfgazou.base.RotateDirection;
 import heignamerican.gfgazou.base.UNext;
@@ -38,8 +39,8 @@ public class Yae学園交流 implements UNext {
 				RotateDirection.CounterClockwise);
 
 		final BufferedImage add = new BufferedImage(800, 640, BufferedImage.TYPE_INT_ARGB); // FIXME
-		UNextBase.kasaneru(add, add1);
-		UNextBase.kasaneru(add, add2);
+		ImageUtils.kasaneru(add, add1);
+		ImageUtils.kasaneru(add, add2);
 
 		ImageIO.write(unextbase.createUNext(add), files.getExtension(), files.getDestFile());
 	}
