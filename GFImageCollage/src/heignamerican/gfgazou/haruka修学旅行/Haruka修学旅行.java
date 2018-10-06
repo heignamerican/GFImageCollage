@@ -17,7 +17,8 @@ public class Haruka修学旅行 implements UNext {
 
 		// No.11307 [修学旅行18]風町陽歌 ... 最終進展
 		final UNextBase unextbase = new UNextBase(this.getClass(), "base.jpg", new String[] {
-				"yubi.txt",
+				"yubi-migi.txt",
+				"yubi-sita.txt",
 		});
 
 		BufferedImage add = unextbase.transform(ImageIO.read(files.getSourceFile()),
