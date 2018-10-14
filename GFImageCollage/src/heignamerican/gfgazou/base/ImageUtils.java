@@ -106,7 +106,7 @@ public class ImageUtils {
 	 *            幅・高さ方向両方で同一の拡大率
 	 * @return
 	 */
-	public static BufferedImage scale(final BufferedImage img, final int scale) {
+	public static BufferedImage scale(final BufferedImage img, final double scale) {
 		return scale(img, scale, scale);
 	}
 
@@ -124,12 +124,12 @@ public class ImageUtils {
 	 *            高さ方向の拡大率
 	 * @return
 	 */
-	public static BufferedImage scale(final BufferedImage img, final int scaleX, final int scaleY) {
+	public static BufferedImage scale(final BufferedImage img, final double scaleX, final double scaleY) {
 		final AffineTransform affine = new AffineTransform();
 		affine.scale(scaleX, scaleY);
 		final AffineTransformOp affineTransformOp = new AffineTransformOp(affine, AffineTransformOp.TYPE_BILINEAR);
 
-		final BufferedImage after = new BufferedImage(img.getWidth() * scaleX, img.getHeight() * scaleY, BufferedImage.TYPE_INT_ARGB);
+		final BufferedImage after = new BufferedImage((int) (img.getWidth() * scaleX), (int) (img.getHeight() * scaleY), BufferedImage.TYPE_INT_ARGB);
 		affineTransformOp.filter(img, after);
 		return after;
 	}
