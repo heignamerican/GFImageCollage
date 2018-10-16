@@ -36,8 +36,10 @@ public class Tansan implements UNext {
 
 	// 曲面に沿わせるようにカーブさせる
 	private BufferedImage convert(final BufferedImage source) {
-		final double rate = 1.08;
+		final double baseRate = 0.08;
 		final int exponent = 2;
+
+		final double rate = 1 + (baseRate * source.getWidth() / source.getHeight());
 
 		final BufferedImage result = new BufferedImage((int) (source.getWidth() * rate), source.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 
